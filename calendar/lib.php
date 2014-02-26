@@ -2359,6 +2359,7 @@ class calendar_event {
 
         // Delete the event
         $DB->delete_records('event', array('id'=>$this->properties->id));
+        add_to_log($this->properties->courseid, 'calendar', 'delete', 'delete.php?id='.$this->properties->id.'&amp;course='.$this->properties->courseid, $this->properties->name);
 
         // If we are deleting parent of a repeated event series, promote the next event in the series as parent
         if (($this->properties->id == $this->properties->repeatid) && !$deleterepeated) {
